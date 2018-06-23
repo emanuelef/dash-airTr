@@ -26,8 +26,8 @@ df["Date/Time"] = pd.to_datetime(df['time'], unit='s')
 df.index = df["Date/Time"]
 df.drop("Date/Time", 1, inplace=True)
 
-df = df.drop(df.columns[[0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14]], axis=1)
-df = df.rename(columns={'latitude': 'Lat', 'longitude': 'Lon'})
+df = df.drop(df.columns[[0, 1, 2, 4, 5, 8, 9, 10, 11, 12, 13, 14]], axis=1)
+df = df.rename(columns={'latitude': 'Lat', 'longitude': 'Lon', 'galtM': 'Alt'})
 
 app.layout = html.Div(
     [
@@ -38,9 +38,24 @@ app.layout = html.Div(
                     go.Scattermapbox(
                         lat=df['Lat'],
                         lon=df['Lon'],
+                        text=df['Alt'],
+                        hoverinfo="lat+lon+text",
                         mode='markers',
                         opacity=0.7,
-                        marker={'size': 8})
+                        marker=Marker(
+                            color=df['Alt'],
+                            colorscale=[[0, "#F4EC15"], [0.04167, "#DAF017"], [
+                                0.0833, "#BBEC19"
+                            ], [0.125, "9DE81B"], [0.1667, "#80E41D"], [
+                                0.2083, "#66E01F"
+                            ], [0.25, "#4CDC20"], [0.292, "#34D822"], [
+                                0.333, "#24D249"
+                            ], [0.375, "#25D042"], [0.4167, "#26CC58"], [
+                                0.4583, "#28C86D"
+                            ], [0.50, "#29C481"], [0.54167, "#2AC093"],
+                                        [0.5833, "#2BBCA4"], [1.0, "#613099"]],
+                            opacity=0.5,
+                        ))
                 ],
                 'layout':
                 go.Layout(
@@ -49,13 +64,13 @@ app.layout = html.Div(
                     mapbox=dict(
                         accesstoken=mapbox_access_token,
                         bearing=0,
-                        center=dict(lat=38.92, lon=-77.07),
+                        center=dict(lat=51.443874, lon=-0.342588),
                         pitch=0,
                         zoom=10),
                 )
             }),
     ],
-    style={"padding-top": "20px"})
+    style={"padding-top": "10px"})
 
 external_css = [
     "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
