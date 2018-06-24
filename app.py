@@ -47,7 +47,8 @@ def update_figure(selected_day):
     print(epochStart)
     print(epochEnd)
 
-    urlRequest = 'http://ec2-18-130-36-119.eu-west-2.compute.amazonaws.com/all?from={}&to={}'.format(epochStart, epochEnd)
+    urlRequest = 'http://air-api-gateway-dev.eu-west-2.elasticbeanstalk.com/all?from={}&to={}'.format(epochStart, epochEnd)
+    #urlRequest = 'http://macbook-pro-di-emanuele.local:3001/all?from={}&to={}'.format(epochStart, epochEnd)
 
     print(urlRequest)
 
