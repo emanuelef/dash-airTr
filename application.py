@@ -13,12 +13,12 @@ import numpy as np
 import os
 import time
 
-app = dash.Dash('AirTrApp')
-server = app.server
+application = dash.Dash('AirTrApp')
+server = application.server
 
 mapbox_access_token = 'pk.eyJ1IjoiZW1hZnVtYSIsImEiOiJjamh1ZGVoZGowbGExM3duMDkwMnhtNDhiIn0.xgW6mtfaTEgFNw8jC6i_Yw'
 
-app.layout = html.Div(
+application.layout = html.Div(
     [
         html.H2('Flights passages'),
         dcc.DatePickerSingle(id='date-picker-single', date=dt(2018, 6, 10)),
@@ -33,7 +33,7 @@ app.layout = html.Div(
     style={'margin': 'auto auto'})
 
 
-@app.callback(
+@application.callback(
     dash.dependencies.Output('passage-flights', 'figure'),
     [dash.dependencies.Input('date-picker-single', 'date')])
 def update_figure(selected_day):
@@ -105,7 +105,7 @@ external_css = [
 ]
 
 for css in external_css:
-    app.css.append_css({"external_url": css})
+    application.css.append_css({"external_url": css})
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    application.run_server(debug=True)
