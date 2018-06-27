@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "app_function": "application.py", 
+        "profile_name": "default", 
+        "project_name": "dash-airtr", 
+        "runtime": "python2.7", 
+        "s3_bucket": "zappa-z74hs7hmr",
+        "aws_region": "eu-west-2"
+    }
+}
